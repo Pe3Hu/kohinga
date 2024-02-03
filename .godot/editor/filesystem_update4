@@ -1,0 +1,15 @@
+res://scene/0/blank.tscn
+res://scene/0/icon.tscn
+res://scene/0/icon.gd
+res://scene/1/cradle.gd
+res://script/Global.gd
+res://scene/1/trainer.tscn
+res://scene/1/trainer.gd
+res://scene/1/cradle.tscn
+res://scene/1/priest.gd
+res://scene/1/member.gd
+res://scene/1/member.tscn
+res://scene/2/experience.tscn
+res://scene/2/experience.gd
+res://scene/2/aspect.tscn
+res://scene/2/aspect.gd

@@ -1,0 +1,49 @@
+[gd_scene load_steps=4 format=3 uid="uid://b6xt38h3tpi5k"]
+
+[ext_resource type="Script" path="res://scene/1/member.gd" id="1_lu5tx"]
+[ext_resource type="PackedScene" uid="uid://ds007l4rsssrq" path="res://scene/2/aspect.tscn" id="2_b23rp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7paps"]
+
+[node name="Member" type="MarginContainer"]
+custom_minimum_size = Vector2(5, 5)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_lu5tx")
+
+[node name="BG" type="Panel" parent="."]
+visible = false
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_7paps")
+
+[node name="HBox" type="HBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="Aspects" type="VBoxContainer" parent="HBox"]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="Health" parent="HBox/Aspects" instance=ExtResource("2_b23rp")]
+layout_mode = 2
+
+[node name="Speed" parent="HBox/Aspects" instance=ExtResource("2_b23rp")]
+layout_mode = 2
+
+[node name="Attack" parent="HBox/Aspects" instance=ExtResource("2_b23rp")]
+layout_mode = 2
+
+[node name="Energy" parent="HBox/Aspects" instance=ExtResource("2_b23rp")]
+layout_mode = 2
