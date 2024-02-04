@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d4jx7abi3pwq3"]
+
+[ext_resource type="Script" path="res://scene/2/shard.gd" id="1_qb8ke"]
+
+[node name="Shard" type="Polygon2D"]
+script = ExtResource("1_qb8ke")

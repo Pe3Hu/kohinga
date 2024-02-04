@@ -1,5 +1,5 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1706969022
+::res://::1707055568
 ::res://asset/::1706968982
 default_env.tres::Environment::-1::1690116911::0::1::::<><>::
 icon.png::CompressedTexture2D::2432420761471245026::1690116911::1690116911::1::::<><>::
@@ -21,8 +21,8 @@ attack.png::CompressedTexture2D::2958368555054058564::1706968503::1706968550::1:
 energy.png::CompressedTexture2D::1753745863452354111::1706968521::1706968550::1::::<><>::
 health.png::CompressedTexture2D::2050399978778512580::1706968491::1706968550::1::::<><>::
 speed.png::CompressedTexture2D::5463291286890684863::1706968531::1706968550::1::::<><>::
-::res://scene/::1706968982
-::res://scene/0/::1706968982
+::res://scene/::1707055448
+::res://scene/0/::1707055568
 blank.tscn::PackedScene::706186300528003691::1706967162::0::1::::<><>::
 game.gd::GDScript::-1::1701731360::0::1::::<>Node<>::
 game.tscn::PackedScene::8246655032211948728::1699765042::0::1::::<><>::res://scene/0/game.gd<>uid://c8p8p11wpyu27
@@ -30,15 +30,19 @@ icon.gd::GDScript::-1::1706968259::0::1::::<>MarginContainer<>::
 icon.tscn::PackedScene::5381527879177219912::1706967162::0::1::::<><>::res://scene/0/icon.gd<>uid://deu2vlj4q8un0::::res://asset/font/letter/Chunk Five Print.otf
 sketch.gd::GDScript::-1::1701187924::0::1::::<>MarginContainer<>::
 sketch.tscn::PackedScene::7122070728214644470::1701887096::0::1::::<><>::res://scene/0/sketch.gd<>uid://tiu625irnnwp::::res://scene/1/cradle.tscn
-::res://scene/1/::1706968982
+::res://scene/1/::1707055507
 cradle.gd::GDScript::-1::1706967155::0::1::::<>MarginContainer<>::
 cradle.tscn::PackedScene::1351374215482788775::1706967182::0::1::::<><>::res://scene/1/cradle.gd
 member.gd::GDScript::-1::1706968626::0::1::::<>MarginContainer<>::
-member.tscn::PackedScene::4610960895289747470::1706968952::0::1::::<><>::res://scene/1/member.gd<>uid://ds007l4rsssrq::::res://scene/2/aspect.tscn
+member.tscn::PackedScene::4610960895289747470::1707055507::0::1::::<><>::res://scene/1/member.gd<>uid://cjtupnuo84c23::::res://scene/3/aspect.tscn
 trainer.gd::GDScript::-1::1706967111::0::1::::<>MarginContainer<>::
 trainer.tscn::PackedScene::6628520103918968447::1706967162::0::1::::<><>::res://scene/1/trainer.gd
-::res://scene/2/::1706968982
+::res://scene/2/::1707055577
+loop.tscn::PackedScene::7423116071046826603::1707055598::0::1::::<><>::
+ruin.tscn::PackedScene::5315185956653534330::1707055577::0::1::::<><>::
+::res://scene/3/::1707055507
 aspect.gd::GDScript::-1::1706968938::0::1::::<>MarginContainer<>::
-aspect.tscn::PackedScene::8475846373992863530::1706968952::0::1::::<><>::res://scene/2/aspect.gd<>uid://ciw38iqel0v5a::::res://scene/0/icon.tscn
+aspect.tscn::PackedScene::5445005978600510322::1707055507::0::1::::<><>::res://scene/3/aspect.gd<>uid://ciw38iqel0v5a::::res://scene/0/icon.tscn
+::res://scene/4/::1707055447
 ::res://script/::1706968982
 Global.gd::GDScript::-1::1706968725::0::1::::<>Node<>::

@@ -24,14 +24,25 @@ func _ready() -> void:
 
 func init_arr() -> void:
 	arr.aspect = ["health", "speed", "attack", "energy"]
+	arr.direction = ["up", "right", "down", "left"]
 
 
 func init_num() -> void:
 	num.index = {}
+	num.index.shard = 0
+	
+	num.shard = {}
+	num.shard.a = 30
+	num.shard.d = num.shard.a * 2 / sqrt(2)
+	num.shard.r = num.shard.d / 2
+	
+	num.tunnel = {}
+	num.tunnel.n = 12
 
 
 func init_dict() -> void:
 	init_neighbor()
+	init_corner()
 
 
 func init_neighbor() -> void:
@@ -80,6 +91,32 @@ func init_neighbor() -> void:
 	]
 
 
+func init_corner() -> void:
+	dict.order = {}
+	dict.order.pair = {}
+	dict.order.pair["even"] = "odd"
+	dict.order.pair["odd"] = "even"
+	var corners = [3,4,6]
+	dict.corner = {}
+	dict.corner.vector = {}
+	
+	for corners_ in corners:
+		dict.corner.vector[corners_] = {}
+		dict.corner.vector[corners_].even = {}
+		
+		for order_ in dict.order.pair.keys():
+			dict.corner.vector[corners_][order_] = {}
+		
+			for _i in corners_:
+				var angle = 2 * PI * _i / corners_ - PI / 2
+				
+				if order_ == "odd":
+					angle += PI/corners_
+				
+				var vertex = Vector2(1,0).rotated(angle)
+				dict.corner.vector[corners_][order_][_i] = vertex
+
+
 func init_emptyjson() -> void:
 	dict.emptyjson = {}
 	dict.emptyjson.title = {}
@@ -104,6 +141,10 @@ func init_node() -> void:
 func init_scene() -> void:
 	scene.trainer = load("res://scene/1/trainer.tscn")
 	scene.member = load("res://scene/1/member.tscn")
+	
+	scene.loop = load("res://scene/2/loop.tscn")
+	scene.shard = load("res://scene/2/shard.tscn")
+	scene.track = load("res://scene/2/track.tscn")
 
 
 func init_vec():
@@ -115,6 +156,7 @@ func init_vec():
 	
 	vec.size.bar = Vector2(120, 12)
 	vec.size.aspect = Vector2(vec.size.bar.x + vec.size.icon.x, vec.size.icon.y)
+	vec.size.shard = Vector2(num.shard.a, num.shard.a)
 	
 	init_window_size()
 

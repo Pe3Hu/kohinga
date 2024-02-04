@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://ds007l4rsssrq"]
+[gd_scene load_steps=5 format=3 uid="uid://cjtupnuo84c23"]
 
-[ext_resource type="Script" path="res://scene/2/aspect.gd" id="1_s626u"]
+[ext_resource type="Script" path="res://scene/3/aspect.gd" id="1_s626u"]
 [ext_resource type="PackedScene" uid="uid://ciw38iqel0v5a" path="res://scene/0/icon.tscn" id="2_ysrkh"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q3sqh"]

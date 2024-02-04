@@ -1,10 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://tiu625irnnwp"]
+[gd_scene load_steps=3 format=3 uid="uid://dd02vws56ok2n"]
 
-[ext_resource type="Script" path="res://scene/1/cradle.gd" id="1_3gs5w"]
+[ext_resource type="Script" path="res://scene/2/loop.gd" id="1_mte4t"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7paps"]
 
-[node name="Cradle" type="MarginContainer"]
+[node name="Loop" type="MarginContainer"]
 custom_minimum_size = Vector2(5, 5)
 anchors_preset = 8
 anchor_left = 0.5
@@ -19,17 +19,13 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-script = ExtResource("1_3gs5w")
+script = ExtResource("1_mte4t")
 
 [node name="BG" type="Panel" parent="."]
 visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_7paps")
 
-[node name="HBox" type="HBoxContainer" parent="."]
-layout_mode = 2
-alignment = 1
+[node name="Shards" type="Node2D" parent="."]
 
-[node name="Trainers" type="HBoxContainer" parent="HBox"]
-layout_mode = 2
-alignment = 1
+[node name="Tracks" type="Node2D" parent="."]

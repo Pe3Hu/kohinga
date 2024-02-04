@@ -2,7 +2,7 @@ extends MarginContainer
 
 
 #region vars
-@onready var traineres = $HBox/Traineres
+@onready var trainers = $HBox/Trainers
 
 var sketch = null
 #endregion
@@ -21,6 +21,6 @@ func init_trainers() -> void:
 		input.cradle = self
 	
 		var trainer = Global.scene.trainer.instantiate()
-		traineres.add_child(trainer)
+		trainers.add_child(trainer)
 		trainer.set_attributes(input)
 #endregion

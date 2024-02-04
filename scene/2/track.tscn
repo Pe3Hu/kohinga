@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cii0h1fllu7pw"]
+
+[ext_resource type="Script" path="res://scene/2/track.gd" id="1_faexe"]
+
+[node name="Track" type="Line2D"]
+width = 4.0
+script = ExtResource("1_faexe")
