@@ -2,14 +2,15 @@ extends Polygon2D
 
 
 #region vars
-
 var loop = null
 var grid = null
+var sector = null
 var index = null
 var parent = null
 var child = null
 var type = null
-var tracks = []
+var tracks = {}
+var neighbors = {}
 #endregion
 
 
@@ -17,6 +18,7 @@ var tracks = []
 func set_attributes(input_: Dictionary) -> void:
 	loop = input_.loop
 	grid = input_.grid
+	sector = input_.sector
 	parent = input_.parent
 	
 	init_basic_setting()
@@ -29,7 +31,7 @@ func init_basic_setting() -> void:
 	Global.num.index.shard += 1
 	set_vertexs()
 	init_track()
-	update_color_based_on_index()
+	update_color_based_on_sector()
 
 
 func set_vertexs() -> void:
@@ -66,6 +68,11 @@ func update_color_based_on_index() -> void:
 		color = Color.BLACK
 
 
+func update_color_based_on_sector() -> void:
+	var hue = float(sector) / 4
+	color = Color.from_hsv(hue, 0.9, 0.7)
+
+
 func update_type() -> void:
 	if parent != null and child != null:
 		if parent.grid.x == child.grid.x or parent.grid.y == child.grid.y:
@@ -73,13 +80,11 @@ func update_type() -> void:
 		else:
 			type = "bend"
 			
-		match type:
-			"direct":
-				color = Color.BLACK
-			"bend":
-				color = Color.WHITE
-		
-		for track in tracks:
-			if track.type == null:
-				track.set_type(type)
+		#match type:
+			#"direct":
+				#color = Color.BLACK
+			#"bend":
+				#color = Color.WHITE
+
+
 #endregion

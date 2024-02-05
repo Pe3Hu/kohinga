@@ -2,13 +2,14 @@ extends Line2D
 
 
 #region vars
-
 var loop = null
 var shards = null
 var type = null
+var subtype = null
 var parent = null
 var child = null
 var direction = null
+var sector = null
 #endregion
 
 
@@ -21,10 +22,7 @@ func set_attributes(input_: Dictionary) -> void:
 
 
 func init_basic_setting() -> void:
-	for shard in shards:
-		add_point(shard.position)
-		shard.tracks.append(self)
-	
+	update_points()
 	
 	for shard in shards:
 		if shards.has(shard.child):
@@ -32,17 +30,47 @@ func init_basic_setting() -> void:
 			child = shard.child
 			break
 	
+	parent.tracks[self] = child
+	child.tracks[self] = parent
+	
+	parent.neighbors[child] = self
+	child.neighbors[parent] = self
+	
 	direction = child.grid - parent.grid
+	sector = max(child.sector, parent.sector)
+	loop.sectors[sector].append(self)
+	subtype = "primary"
 
 
 func set_type(type_: String) -> void:
-	type = type_
+	if type != "bend":
+		type = type_
+		
+		match type:
+			"direct":
+				default_color = Color.BLACK
+			"bend":
+				default_color = Color.WHITE
+
+
+func update_points() -> void:
+	points = []
 	
-	match type:
-		"bend":
-			default_color = Color.RED
-		"direct":
-			default_color = Color.BLUE
+	for shard in shards:
+		add_point(shard.position)
+
+
+func crush() -> void:
+	for shard in shards:
+		shard.tracks.erase(self)
+		
+		for neighbor in shard.neighbors:
+			if shard.neighbors[neighbor]:
+				shard.neighbors.erase(neighbor)
+				break
+	
+	loop.tracks.remove_child(self)
+	queue_free()
 #endregion
 
 

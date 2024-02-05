@@ -7,6 +7,7 @@ extends MarginContainer
 
 var ruin = null
 var grids = {}
+var sectors = {}
 #endregion
 
 
@@ -24,114 +25,38 @@ func init_basic_setting() -> void:
 
 func init_shards() -> void:
 	var grid = Vector2()
-	var primary = 5
-	var secondary = 2
-	var deviations = {}
-	var n = Global.dict.neighbor.linear2.size()
-	var deviation = null
-	var old = null
-	var l = Global.num.tunnel.n
-	var shifts = [-1, 0, 1]
+	var s = Global.dict.neighbor.linear2.size()
 	
-	for _i in 3:
-		deviations[-1] = secondary
+	for _i in Global.dict.neighbor.linear2.size():
+		sectors[_i] = []
 		
-		for _j in l:
-			for shift in shifts:
-				if !deviations.has(shift):
-					match shift:
-						-1:
-							deviations[shift] = secondary
-						0:
-							deviations[shift] = primary + secondary
-						1:
-							deviations[shift] = primary
-			
-			for shift in shifts:
-				var index = (_i + shift + n + 1) % n
-				var vec = Global.dict.neighbor.linear2[index]
-				var temp = grid + vec
-				
-				if grids.has(temp):
-					deviations.erase(shift)
-			
-			if _j == l - 1:
-				deviations.erase(-1)
-			
-			if deviations.keys().is_empty():
-				break
-			
-			if _i == 0 and _j == 0:
-				pass
-			else:
-				deviation = Global.get_random_key(deviations)
-				var index = (_i + deviation + n + 1) % n
-				var vec = Global.dict.neighbor.linear2[index]
-				grid += vec
-			
-			add_shard(grid)
+		for _j in Global.num.tunnel.m:
+			#if _i == 0 and _j == 0:
+				#pass
+			#else:
+			grid += Global.dict.neighbor.linear2[_i]
+			add_shard(grid, _i)
 	
-	var x = abs(grid.x)
-	var y = abs(grid.y)
-	print([x,y, x +y])
-	var _i = 3
 	
-	if x + y > l:
-		compress_track()
+	var _shard = shards.get_child(0)
+	_shard.parent = shards.get_child(shards.get_child_count()-1)
+	_shard.update_type()
+	_shard.init_track()
 	
-	if x + y < l:
-		stretch_track()
-	
-	grid = shards.get_child(shards.get_child_count() - 1).grid
-	print(grid)
-	
-	if false:
-		x = abs(grid.x)
-		y = abs(grid.y)
-		
-		for _j in x + y:
-			var d = abs(grid.x) + abs(grid.y)
-			
-			for shift in shifts:
-				if !deviations.has(shift):
-					match shift:
-						-1:
-							deviations[shift] = primary
-						0:
-							deviations[shift] = primary
-						1:
-							deviations[shift] = primary
-			
-				if deviations.keys().is_empty():
-					break
-				var index = (_i + shift + n + 1) % n
-				var vec = Global.dict.neighbor.linear2[index]
-				var temp = grid + vec
-				var _d = abs(temp.x) + abs(temp.y)
-				
-				if grids.has(temp):
-					deviations.erase(shift)
-				
-				if _d > d:
-					deviations.erase(shift)
-			
-			if deviations.keys().is_empty():
-				break
-			
-			deviation = Global.get_random_key(deviations)
-			var index = (_i + deviation + n + 1) % n
-			var vec = Global.dict.neighbor.linear2[index]
-			grid += vec
-			add_shard(grid)
-		
 	for shard in shards.get_children():
-		shard.update_color_based_on_index()
+		for track in shard.tracks:
+			track.set_type(shard.type)
+	
+	stretch_tracks()
+	#for shard in shards.get_children():
+	#	shard.update_color_based_on_index()
 
 
-func add_shard(grid_: Vector2) -> void:
+func add_shard(grid_: Vector2, sector_: int) -> void:
 	var input = {}
 	input.loop = self
 	input.grid = Vector2(grid_)
+	input.sector = sector_
 	input.parent = null
 	
 	if shards.get_child_count() > 0:
@@ -142,29 +67,84 @@ func add_shard(grid_: Vector2) -> void:
 	shard.set_attributes(input)
 
 
-func compress_track() -> void:
-	var grid = shards.get_child(shards.get_child_count() - 1).grid
-	var l = Global.num.tunnel.n
-	var k = abs(grid.x) + abs(grid.y)
+func stretch_tracks() -> void:
+	var l = Global.num.tunnel.n - Global.num.tunnel.m
+	var breaches = {}
+	var n = Global.dict.neighbor.linear2.size()
 	
+	for _i in n:
+		breaches[_i] = l
 	
-	while k > l:
-		var options = []
+	var detours = {}
+	detours[1] = 9
+	detours[2] = 4
+	detours[4] = 1
+	
+	while !breaches.keys().is_empty():
+		var breach = 1#Global.get_random_key(breaches)
+		var mirror = (breach + n / 2) % n
+		var _sectors = [breach, mirror]
+		var detour = 1#Global.get_random_key(detours)
 		
-		for track in tracks.get_children():
-			if track.type == "direct":
-				options.append(track)
 			
-		var option = options.pick_random()
-		option.add_detour()
-		k -= 2
-
-
-func stretch_track() -> void:
-	var grid = shards.get_child(shards.get_child_count() - 1).grid
-	var l = Global.num.tunnel.n
-	var k = abs(grid.x) + abs(grid.y)
+		match detour:
+			1:
+				var shards = []
+				
+				for sector in _sectors:
+					var track = sectors[sector].front()#sectors[sector].pick_random()
+					shards.append(track.child)
+				
+				displacement(shards)
+				shards.append(shards.front())
+				shards.pop_front()
+				displacement(shards)
+				
+				for shard in shards:
+					var track = shard.neighbors[shard.parent]
+					track.crush()
+				#	shard.add_extension()
+		
+		breaches = {}
 	
-	while k < l:
-		k -= 1
+	for track in tracks.get_children():
+		track.update_points()
+
+
+func add_detour(sector_: int, detour_: int) -> void:
+	var _tracks = []
+	_tracks.append_array(sectors[sector_])
+	var track = _tracks[0]#_tracks.pick_random()
+	var child = track.child
+	
+
+func displacement(shards_: Array) -> void:
+	var shard = shards_.front()
+	var gap = Global.dict.neighbor.linear2[shard.sector]
+	shard.grid += gap * 1.5
+	shard.position = shard.grid * Global.vec.size.shard
+	print("~")
+	
+	while shard.child != shards_.back():
+		shard = shard.child
+		
+		if shard.sector != shard.child.sector:
+			var index = (shard.sector + 1) % Global.dict.neighbor.linear2.size()
+			gap = Global.dict.neighbor.linear2[index]
+		
+		shard.grid = shard.parent.grid + gap
+		shard.position = shard.grid * Global.vec.size.shard
+
+
+func add_extension(shard_: Polygon2D) -> void:
+	shard_.tracks[shard_] = null
+	var input = {}
+	input.loop = self
+	input.grid = shard_.grid + Global.dict.neighbor.linear2[shard_.sector]
+	input.sector = shard_.sector
+	input.parent = shard_
+
+	var shard = Global.scene.shard.instantiate()
+	shards.add_child(shard)
+	shard.set_attributes(input)
 #endregion

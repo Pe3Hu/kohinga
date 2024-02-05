@@ -38,6 +38,7 @@ func init_num() -> void:
 	
 	num.tunnel = {}
 	num.tunnel.n = 12
+	num.tunnel.m = 6
 
 
 func init_dict() -> void:
@@ -54,10 +55,10 @@ func init_neighbor() -> void:
 		Vector3(-1, 0,  0)
 	]
 	dict.neighbor.linear2 = [
-		Vector2( 0,-1),
 		Vector2( 1, 0),
 		Vector2( 0, 1),
-		Vector2(-1, 0)
+		Vector2(-1, 0),
+		Vector2( 0,-1)
 	]
 	dict.neighbor.diagonal = [
 		Vector2( 1,-1),
