@@ -26,6 +26,10 @@ visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_7paps")
 
+[node name="Sectors" type="Node2D" parent="."]
+
+[node name="Tunnels" type="Node2D" parent="."]
+
 [node name="Shards" type="Node2D" parent="."]
 
 [node name="Tracks" type="Node2D" parent="."]

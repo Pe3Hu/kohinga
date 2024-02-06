@@ -1,7 +1,12 @@
-res://scene/2/track.tscn
-res://script/Global.gd
+res://scene/2/sector.tscn
+res://scene/2/tunnel.tscn
 res://scene/2/loop.tscn
 res://scene/2/loop.gd
+res://scene/0/game.gd
+res://scene/2/sector.gd
+res://script/Global.gd
+res://scene/2/tunnel.gd
 res://scene/2/shard.tscn
+res://scene/2/track.tscn
 res://scene/2/shard.gd
 res://scene/2/track.gd

@@ -37,8 +37,9 @@ func init_basic_setting() -> void:
 	child.neighbors[parent] = self
 	
 	direction = child.grid - parent.grid
-	sector = max(child.sector, parent.sector)
-	loop.sectors[sector].append(self)
+	sector = max(child.tunnel.sector.index, parent.tunnel.sector.index)
+	sector = loop.sectors.get_child(sector)
+	sector.tracks.append(self)
 	subtype = "primary"
 
 

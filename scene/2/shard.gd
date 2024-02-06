@@ -2,9 +2,9 @@ extends Polygon2D
 
 
 #region vars
+var tunnel = null
 var loop = null
 var grid = null
-var sector = null
 var index = null
 var parent = null
 var child = null
@@ -16,15 +16,15 @@ var neighbors = {}
 
 #region init
 func set_attributes(input_: Dictionary) -> void:
-	loop = input_.loop
+	tunnel = input_.tunnel
 	grid = input_.grid
-	sector = input_.sector
 	parent = input_.parent
 	
 	init_basic_setting()
 
 
 func init_basic_setting() -> void:
+	loop = tunnel.loop
 	loop.grids[grid] = self
 	position = grid * Global.vec.size.shard
 	index = int(Global.num.index.shard)
@@ -61,16 +61,20 @@ func init_track() -> void:
 
 
 func update_color_based_on_index() -> void:
-	var hue = float(index) / (Global.num.index.shard)
+	var hue = float(index) / 48#(Global.num.index.shard)
 	color = Color.from_hsv(hue, 0.9, 0.7)
 	
-	if index % Global.num.tunnel.n == 0:
-		color = Color.BLACK
+	#if index % Global.num.tunnel.n == 0:
+	#	color = Color.BLACK
 
 
 func update_color_based_on_sector() -> void:
-	var hue = float(sector) / 4
+	var hue = float(tunnel.sector.index) / 4
 	color = Color.from_hsv(hue, 0.9, 0.7)
+
+
+func update_color_based_on_tunnel() -> void:
+	color = Global.color.tunnel[tunnel.type]
 
 
 func update_type() -> void:

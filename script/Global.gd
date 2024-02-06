@@ -25,6 +25,7 @@ func _ready() -> void:
 func init_arr() -> void:
 	arr.aspect = ["health", "speed", "attack", "energy"]
 	arr.direction = ["up", "right", "down", "left"]
+	arr.tunnel = ["mainstream", "internal", "external"]
 
 
 func init_num() -> void:
@@ -36,9 +37,8 @@ func init_num() -> void:
 	num.shard.d = num.shard.a * 2 / sqrt(2)
 	num.shard.r = num.shard.d / 2
 	
-	num.tunnel = {}
-	num.tunnel.n = 12
-	num.tunnel.m = 6
+	num.sector = {}
+	num.sector.n = 12
 
 
 func init_dict() -> void:
@@ -144,6 +144,8 @@ func init_scene() -> void:
 	scene.member = load("res://scene/1/member.tscn")
 	
 	scene.loop = load("res://scene/2/loop.tscn")
+	scene.sector = load("res://scene/2/sector.tscn")
+	scene.tunnel = load("res://scene/2/tunnel.tscn")
 	scene.shard = load("res://scene/2/shard.tscn")
 	scene.track = load("res://scene/2/track.tscn")
 
@@ -188,6 +190,11 @@ func init_color():
 	color.bar.experience = {}
 	color.bar.experience.fill = Color.from_hsv(210 / h, 0.9, 0.7)
 	color.bar.experience.background = Color.from_hsv(210 / h, 0.5, 0.9)
+	
+	color.tunnel = {}
+	color.tunnel.external = Color.from_hsv(0 / h, 0.9, 0.7)
+	color.tunnel.mainstream = Color.from_hsv(210 / h, 0.9, 0.7)
+	color.tunnel.internal = Color.from_hsv(120 / h, 0.9, 0.7)
 
 
 func save(path_: String, data_: String):
