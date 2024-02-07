@@ -66,9 +66,9 @@ func init_tunnels() -> void:
 		var tunnel = loop.tunnels.get_child(loop.tunnels.get_child_count() - 1)
 		
 		if tunnel.type != "mainstream":
-			var index = Global.dict.neighbor.linear2.find(tunnel.direction)
+			var _index = Global.dict.neighbor.linear2.find(tunnel.direction)
 			
-			if index == tunnel.sector.index - 1:
+			if _index == tunnel.sector.index - 1:
 				deviations = [-1]
 				mainstream = false
 	
@@ -118,9 +118,6 @@ func init_tunnels() -> void:
 		mainstream = !mainstream
 		extents[input.type] += input.length
 		counter += 1
-	
-	var shard = loop.shards.get_child(loop.shards.get_child_count()-1)
-	var grid = Vector2(shard.grid)
 
 
 func overlap_check(input_: Dictionary) -> bool:
@@ -131,8 +128,8 @@ func overlap_check(input_: Dictionary) -> bool:
 	var grid = Vector2(shard.grid)
 	
 	var n = Global.dict.neighbor.linear2.size()
-	var index = (index + input_.deviation + n) % n
-	var direction = Global.dict.neighbor.linear2[index]
+	var _index = (index + input_.deviation + n) % n
+	var direction = Global.dict.neighbor.linear2[_index]
 	
 	for _i in input_.length:
 		grid += direction
@@ -154,8 +151,8 @@ func desire_to_connect(input_: Dictionary) -> void:
 				var grid = Vector2(shard.grid)
 				
 				var n = Global.dict.neighbor.linear2.size()
-				var index = (index + deviation + n) % n
-				var direction = Global.dict.neighbor.linear2[index]
+				var _index = (index + deviation + n) % n
+				var direction = Global.dict.neighbor.linear2[_index]
 				grid += direction
 				var distance = abs(grid.x) + abs(grid.y)
 				

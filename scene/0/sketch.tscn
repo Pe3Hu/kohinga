@@ -28,9 +28,13 @@ script = ExtResource("1_g4to8")
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_7paps")
 
-[node name="Ruin" parent="." instance=ExtResource("2_gc5l8")]
+[node name="HBox" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="Ruin" parent="HBox" instance=ExtResource("2_gc5l8")]
 layout_mode = 2
 
-[node name="Cradle" parent="." instance=ExtResource("1_i3egr")]
-visible = false
+[node name="Cradle" parent="HBox" instance=ExtResource("1_i3egr")]
 layout_mode = 2

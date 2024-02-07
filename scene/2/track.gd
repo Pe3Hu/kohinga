@@ -58,7 +58,8 @@ func update_points() -> void:
 	points = []
 	
 	for shard in shards:
-		add_point(shard.position)
+		var vertex = shard.position - Vector2.ONE * Global.num.shard.l# * 0.5
+		add_point(vertex)
 
 
 func crush() -> void:

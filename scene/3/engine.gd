@@ -2,25 +2,25 @@ extends MarginContainer
 
 
 #region vars
-@onready var health = $HBox/Aspects/Health
-@onready var speed = $HBox/Aspects/Speed
-@onready var attack = $HBox/Aspects/Attack
-@onready var energy = $HBox/Aspects/Energy
+@onready var health = $Aspects/Health
+@onready var speed = $Aspects/Speed
+@onready var attack = $Aspects/Attack
+@onready var energy = $Aspects/Energy
 
-var trainer = null
-var index = null
+var racer = null
 #endregion
 
 
 #region init
 func set_attributes(input_: Dictionary) -> void:
-	trainer = input_.trainer
+	racer = input_.racer
 	
 	init_basic_setting()
 
 
 func init_basic_setting() -> void:
-	init_aspects()
+	#init_aspects()
+	pass
 
 
 func init_aspects() -> void:
@@ -32,6 +32,3 @@ func init_aspects() -> void:
 		
 		var aspect = get(type)
 		aspect.set_attributes(input)
-#endregion
-
-

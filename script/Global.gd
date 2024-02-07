@@ -31,14 +31,16 @@ func init_arr() -> void:
 func init_num() -> void:
 	num.index = {}
 	num.index.shard = 0
+	num.index.racer = 0
 	
 	num.shard = {}
 	num.shard.a = 30
 	num.shard.d = num.shard.a * 2 / sqrt(2)
 	num.shard.r = num.shard.d / 2
+	num.shard.l = (num.shard.a * 1.5 - num.shard.r) / 2
 	
 	num.sector = {}
-	num.sector.n = 12
+	num.sector.n = 15
 
 
 func init_dict() -> void:
@@ -140,8 +142,8 @@ func init_node() -> void:
 
 
 func init_scene() -> void:
-	scene.trainer = load("res://scene/1/trainer.tscn")
-	scene.member = load("res://scene/1/member.tscn")
+	scene.crew = load("res://scene/1/crew.tscn")
+	scene.racer = load("res://scene/1/racer.tscn")
 	
 	scene.loop = load("res://scene/2/loop.tscn")
 	scene.sector = load("res://scene/2/sector.tscn")

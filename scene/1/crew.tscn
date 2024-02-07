@@ -1,10 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://c1o5004thtnit"]
 
-[ext_resource type="Script" path="res://scene/1/trainer.gd" id="1_lqdvm"]
+[ext_resource type="Script" path="res://scene/1/crew.gd" id="1_qi35l"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7paps"]
 
-[node name="Trainer" type="MarginContainer"]
+[node name="Crew" type="MarginContainer"]
 custom_minimum_size = Vector2(5, 5)
 anchors_preset = 8
 anchor_left = 0.5
@@ -19,7 +19,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-script = ExtResource("1_lqdvm")
+script = ExtResource("1_qi35l")
 
 [node name="BG" type="Panel" parent="."]
 visible = false
@@ -30,7 +30,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_7paps")
 layout_mode = 2
 alignment = 1
 
-[node name="Members" type="GridContainer" parent="HBox"]
+[node name="Racers" type="GridContainer" parent="HBox"]
 layout_mode = 2
 theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0

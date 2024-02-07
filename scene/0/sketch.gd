@@ -1,8 +1,8 @@
 extends MarginContainer
 
 
-@onready var cradle = $Cradle
-@onready var ruin = $Ruin
+@onready var cradle = $HBox/Cradle
+@onready var ruin = $HBox/Ruin
 
 
 func _ready() -> void:
@@ -10,3 +10,8 @@ func _ready() -> void:
 	input.sketch = self
 	cradle.set_attributes(input)
 	ruin.set_attributes(input)
+	
+	var loop = ruin.loops.get_child(0)
+	
+	for crew in cradle.crews.get_children():
+		loop.add_crew(crew)

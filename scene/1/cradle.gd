@@ -2,7 +2,7 @@ extends MarginContainer
 
 
 #region vars
-@onready var trainers = $HBox/Trainers
+@onready var crews = $HBox/Crews
 
 var sketch = null
 #endregion
@@ -12,15 +12,15 @@ var sketch = null
 func set_attributes(input_: Dictionary) -> void:
 	sketch = input_.sketch
 	
-	init_trainers()
+	init_crews()
 
 
-func init_trainers() -> void:
-	for _i in 1:
+func init_crews() -> void:
+	for _i in 5:
 		var input = {}
 		input.cradle = self
 	
-		var trainer = Global.scene.trainer.instantiate()
-		trainers.add_child(trainer)
-		trainer.set_attributes(input)
+		var crew = Global.scene.crew.instantiate()
+		crews.add_child(crew)
+		crew.set_attributes(input)
 #endregion

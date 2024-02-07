@@ -32,7 +32,7 @@ func init_basic_setting() -> void:
 			textureRect.visible = false
 			number.visible = true
 			set_number(subtype)
-			custom_minimum_size = Vector2(Global.vec.size.number)
+			custom_minimum_size = Vector2(Global.vec.size.sixteen)
 		"string":
 			textureRect.visible = false
 			#str.visible = true
@@ -49,9 +49,12 @@ func update_image() -> void:
 	path += type + "/" + str(subtype) + ".png"
 	textureRect.texture = load(path)
 	
-	#var style = StyleBoxFlat.new()
-	#style.bg_color = Color.SLATE_GRAY
-	#bg.set("theme_override_styles/panel", style)
+
+
+func init_bg_style() -> void:
+	var style = StyleBoxFlat.new()
+	style.bg_color = Color.SLATE_GRAY
+	bg.set("theme_override_styles/panel", style)
 #endregion
 
 

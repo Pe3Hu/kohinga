@@ -2,6 +2,8 @@ extends Polygon2D
 
 
 #region vars
+@onready var marker = $Marker
+
 var tunnel = null
 var loop = null
 var grid = null
@@ -11,6 +13,7 @@ var child = null
 var type = null
 var tracks = {}
 var neighbors = {}
+var racer = null
 #endregion
 
 
@@ -32,6 +35,12 @@ func init_basic_setting() -> void:
 	set_vertexs()
 	init_track()
 	update_color_based_on_sector()
+	
+	var input = {}
+	input.type = "number"
+	input.subtype = -1
+	marker.set_attributes(input)
+	marker.size = marker.custom_minimum_size
 
 
 func set_vertexs() -> void:
@@ -42,6 +51,7 @@ func set_vertexs() -> void:
 	
 	for corner in corners:
 		var vertex = Global.dict.corner.vector[corners][order][corner] * r
+		vertex -= Vector2.ONE * Global.num.shard.l
 		vertexs.append(vertex)
 	
 	set_polygon(vertexs)
@@ -89,6 +99,16 @@ func update_type() -> void:
 				#color = Color.BLACK
 			#"bend":
 				#color = Color.WHITE
-
-
 #endregion
+
+
+func set_racer(racer_) -> void:
+	racer = racer_
+	
+	if racer != null:
+		marker.set_number(racer.marker.get_number())
+		
+		if !marker.visible:
+			marker.visible = true
+	else:
+		marker.visible = false
